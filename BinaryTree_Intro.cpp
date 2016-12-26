@@ -33,8 +33,8 @@ void preorder(struct node* head)
 	if(head!=NULL)
 	{
 		printf("%d ", head->data);
-		inorder(head->left);
-		inorder(head->right);
+		preorder(head->left);
+		preorder(head->right);
 	}	
 }
 
@@ -42,8 +42,8 @@ void postorder(struct node* head)
 {
 	if(head!=NULL)
 	{
-		inorder(head->left);
-		inorder(head->right);
+		postorder(head->left);
+		postorder(head->right);
 		printf("%d ", head->data);
 	}	
 }
