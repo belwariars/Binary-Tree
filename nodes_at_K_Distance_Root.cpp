@@ -37,40 +37,27 @@ int height(struct node *root)
 		return rheight+1;
 	}
 }
+bool flag = false;
+stack<struct node*> st;
 
-void distanceKnodes(struct node *root, int Kdist)
+bool ancestors(struct node *root, int target)
 {
-	list<struct node*> queue;
-	struct node *temp = root;
-	queue.push_back(temp);
-	list<struct node*>:: iterator it;
-	int k = 0;
-	
-	while(queue.size() > 0)
+	if(root == NULL)
 	{
-		int count = queue.size();
-		if(k == Kdist)
-		{
-			for(it=queue.begin(); it!=queue.end(); it++)
-			{
-				printf("%d ", (*it)->data);
-			}
-			break;
-		}
-		k++;
-		while(count--)
-		{
-			temp = queue.front();
-			queue.pop_front();
-			if(temp->left != NULL)
-			{
-				queue.push_back(temp->left);
-			}
-			if(temp->right != NULL)
-			{
-				queue.push_back(temp->right);
-			}
-		}
+		return false;
+	}
+	
+	if(root->data == target)
+	{
+		return true;
+	}
+	if(ancestors(root->left, target) || ancestors(root->right, target))
+	{
+		printf("%d ", root->data);
+	}
+	else
+	{
+		return false;
 	}
 }
 
@@ -94,7 +81,7 @@ int main()
   root->left->right = createnode(5);
   root->right->left = createnode(8);	
  
- 	distanceKnodes(root, 0);
+ 	ancestors(root, 8);
 	
 	
 	return 0;
